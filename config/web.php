@@ -54,8 +54,9 @@ $config = [
         
     ],
     'modules' => [
-        'admin' => [
+        'general-medic' => [
             'class' => 'app\modules\admin\Module',
+        'defaultRoute' => 'application'
         ],
         'account' => [
             'class' => 'app\modules\account\Module',

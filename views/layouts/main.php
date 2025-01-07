@@ -52,6 +52,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     . Html::endForm()
                     . '</li>',
             !Yii::$app->user->isGuest && !Yii::$app->user->identity->isAdmin ? ['label' => 'Личный кабинет', 'url' => ['/account']] : '',
+            !Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin ? ['label' => 'Панель управления', 'url' => ['/general-medic']] : '',
         ]
     ]);
     NavBar::end();
