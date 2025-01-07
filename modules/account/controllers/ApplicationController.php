@@ -94,6 +94,7 @@ class ApplicationController extends Controller
                }
 
                 if ($model->save()) { 
+                    Yii::$app->session->setFlash('success', 'Заявка успешно создана!');
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
             }
@@ -120,11 +121,14 @@ class ApplicationController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', 'Заявка успешно изменена!');
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'nameDoctor' => Doctor::getDoctorName(),
+            'titleComplaint' => Complaint::getComplaintTitle(),
         ]);
     }
 

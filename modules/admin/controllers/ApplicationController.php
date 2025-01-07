@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use Yii;
 use app\models\Application;
 use app\models\Status;
 use app\modules\admin\models\ApplicationSearch;
@@ -66,6 +67,7 @@ class ApplicationController extends Controller
         if ($model = Application::findOne($id)) {
             if ($model->status_id == Status::getStatusId('Новый')) {
                 $model->status_id = Status::getStatusId('Одобрен');
+                Yii::$app->session->setFlash('success', 'Статус заявки изменен на "Одобрен"!');
                 $model->save();
             }
         }
@@ -109,6 +111,7 @@ class ApplicationController extends Controller
         if ($this->request->isPost && $model->load($this->request->post())) {
             if ($model->status_id == Status::getStatusId('Новый') || $model->status_id == Status::getStatusId('Одобрен')) {
                 $model->status_id = Status::getStatusId('Отменен');
+                Yii::$app->session->setFlash('success', 'Статус заявки изменен на "Отменен"!');
                 $model->save();
             }
             return $this->redirect(['view', 'id' => $model->id]);

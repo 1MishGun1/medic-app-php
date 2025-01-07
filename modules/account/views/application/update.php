@@ -16,6 +16,8 @@ $this->params['breadcrumbs'][] = 'Редактировать';
 
     <?= $this->render('_form', [
         'model' => $model,
+        'nameDoctor' => $nameDoctor,
+        'titleComplaint' => $titleComplaint
     ]) ?>
 
 </div>
