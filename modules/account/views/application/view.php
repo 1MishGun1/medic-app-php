@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Status;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -17,14 +18,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Назад', ['index'], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
+        <?= $model->status_id == Status::getStatusId('Новый') ? Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) : '' ?>
+        <?= $model->status_id == Status::getStatusId('Новый') ? Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Точно удалить данную заявку?',
                 'method' => 'post',
             ],
-        ]) ?>
+        ]) : '' ?>
     </p>
 
     <?= DetailView::widget([

@@ -1,6 +1,7 @@
 <?php
 
 use yii\bootstrap5\Html;
+use app\models\Status;
 ?>
 <div class="card" style="width: 26rem;">
   <div class="card-body">
@@ -12,5 +13,13 @@ use yii\bootstrap5\Html;
     <h6 class="card-text">Статус: <?= $model->status->title ?></h6>
 
     <?= Html::a('Просмотр', ['view', 'id' => $model->id], ['class' => 'btn btn-outline-primary w-100']) ?>
+    <?= $model->status_id == Status::getStatusId('Новый') ? Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-outline-primary w-100 mt-2']) : '' ?>
+        <?= $model->status_id == Status::getStatusId('Новый') ? Html::a('Удалить', ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-outline-danger w-100 mt-2',
+            'data' => [
+                'confirm' => 'Точно удалить данную заявку?',
+                'method' => 'post',
+            ],
+        ]) : '' ?>
   </div>
 </div>
