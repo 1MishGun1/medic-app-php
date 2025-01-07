@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\models\Status;
 
 /** @var yii\web\View $this */
 /** @var app\models\Application $model */
@@ -16,8 +17,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Назад', ['index'], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Отменить', ['', 'id' => $model->id], ['class' => 'btn btn-danger']) ?>
+        <?= Html::a('Назад', ['index'], ['class' => 'btn btn-outline-info']) ?>
+        <?= $model->status_id == Status::getStatusId('Новый') ? Html::a('Одобрить', ['verify', 'id' => $model->id], ['class' => 'btn btn-outline-primary']) : '' ?>
+        <?= $model->status_id == Status::getStatusId('Новый') || $model->status_id == Status::getStatusId('Одобрен') 
+            ? Html::a('Отменить', ['cancel', 'id' => $model->id], ['class' => 'btn btn-outline-danger']) 
+            : '' 
+        ?>
     </p>
 
     <?= DetailView::widget([

@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap5\Html;
+use yii\bootstrap5\ActiveForm;
 
 /** @var yii\web\View $this */
 /** @var app\models\Application $model */
@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'comment_admin')->textarea(['rows' => 6]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Отменить заявку', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Отменить заявку', ['class' => 'btn btn-outline-danger']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

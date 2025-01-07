@@ -3,6 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use app\models\Application;
+use app\models\Status;
 use app\modules\admin\models\ApplicationSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -60,6 +61,17 @@ class ApplicationController extends Controller
         ]);
     }
 
+    public function actionVerify($id)
+    {
+        if ($model = Application::findOne($id)) {
+            if ($model->status_id == Status::getStatusId('Новый')) {
+                $model->status_id = Status::getStatusId('Одобрен');
+                $model->save();
+            }
+        }
+        return $this->redirect(['index']);
+    }
+
     /**
      * Creates a new Application model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -89,11 +101,16 @@ class ApplicationController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionCancel($id)
     {
         $model = $this->findModel($id);
+        $model->scenario = Application::SCENARIO_CANCEL;
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            if ($model->status_id == Status::getStatusId('Новый') || $model->status_id == Status::getStatusId('Одобрен')) {
+                $model->status_id = Status::getStatusId('Отменен');
+                $model->save();
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

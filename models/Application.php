@@ -31,6 +31,7 @@ class Application extends \yii\db\ActiveRecord
 
     const SCENARIO_COMMENT = 'comment';
     const SCENARIO_COMPLAINT = 'complaint';
+    const SCENARIO_CANCEL = 'cancel';
 
     /**
      * {@inheritdoc}
@@ -59,6 +60,7 @@ class Application extends \yii\db\ActiveRecord
 
             ['complaints_id', 'required', 'on' => self::SCENARIO_COMPLAINT],
             ['comment', 'required', 'on' => self::SCENARIO_COMMENT],
+            ['comment_admin', 'required', 'on' => self::SCENARIO_CANCEL],
         ];
     }
 
