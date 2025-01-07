@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
 /** @var app\modules\admin\models\ApplicationSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Личный кабинет';
+$this->title = 'Панель управления';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="application-index">
