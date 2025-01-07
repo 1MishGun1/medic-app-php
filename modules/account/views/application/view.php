@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => $model->complaints?->title,
                 'visible' => (bool)$model->complaints,
             ],
-            'description:ntext',
+            'description',
             [
                 'attribute' => 'comment',
                 'value' => $model->comment,
@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'create_at',
             [
-                'attribute' => 'comment_admin:ntext',
+                'attribute' => 'comment_admin',
                 'value' => $model->comment_admin,
                 'visible' => (bool)$model->comment_admin,
             ],
