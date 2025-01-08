@@ -37,22 +37,22 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top']
     ]);
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav'],
+        'options' => ['class' => 'navbar-nav ms-auto d-flex gap-2 align-items-center'],
         'items' => [
             ['label' => 'Главная', 'url' => ['/site/index']],
             Yii::$app->user->isGuest ? ['label' => 'Регистрация', 'url' => ['/site/register']] : '',
+            !Yii::$app->user->isGuest && !Yii::$app->user->identity->isAdmin ? ['label' => 'Личный кабинет', 'url' => ['/account']] : '',
+            !Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin ? ['label' => 'Панель управления', 'url' => ['/general-medic']] : '',
             Yii::$app->user->isGuest
                 ? ['label' => 'Вход', 'url' => ['/site/login']]
                 : '<li class="nav-item">'
                     . Html::beginForm(['/site/logout'])
                     . Html::submitButton(
-                        'Выход (' . Yii::$app->user->identity->login . ')',
+                        'Выход (' . Yii::$app->user->identity->name . ')',
                         ['class' => 'nav-link btn btn-link logout']
                     )
                     . Html::endForm()
                     . '</li>',
-            !Yii::$app->user->isGuest && !Yii::$app->user->identity->isAdmin ? ['label' => 'Личный кабинет', 'url' => ['/account']] : '',
-            !Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin ? ['label' => 'Панель управления', 'url' => ['/general-medic']] : '',
         ]
     ]);
     NavBar::end();
