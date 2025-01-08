@@ -2,7 +2,7 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=medic-db',
+    'dsn' => 'mysql:host=localhost;dbname=medic-advanced-db',
     'username' => 'root',
     'password' => '',
     'charset' => 'utf8',
