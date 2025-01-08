@@ -17,6 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <?= Html::a('Список врачей', ['doctor/index'], ['class' => 'btn btn-outline-primary']) ?>
+
     <?php Pjax::begin(); ?>
 
     <?= ListView::widget([
