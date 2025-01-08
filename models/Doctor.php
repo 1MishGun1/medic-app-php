@@ -10,6 +10,10 @@ use yii\db\Query;
  *
  * @property int $id
  * @property string $name
+ * @property int $experience
+ * @property string $education
+ * @property string $specialization
+ * @property string $img
  *
  * @property Application[] $applications
  */
@@ -29,8 +33,9 @@ class Doctor extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
-            [['name'], 'string', 'max' => 255],
+            [['name', 'education', 'specialization', 'img'], 'required'],
+            [['experience'], 'integer'],
+            [['name', 'education', 'specialization', 'img'], 'string', 'max' => 255],
         ];
     }
 
@@ -42,6 +47,10 @@ class Doctor extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
+            'experience' => 'Experience',
+            'education' => 'Education',
+            'specialization' => 'Specialization',
+            'img' => 'Img',
         ];
     }
 
