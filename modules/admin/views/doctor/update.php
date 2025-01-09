@@ -1,14 +1,14 @@
 <?php
 
-use yii\helpers\Html;
+use yii\bootstrap5\Html;
 
 /** @var yii\web\View $this */
 /** @var app\models\Doctor $model */
 
-$this->title = 'Update Doctor: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Doctors', 'url' => ['index']];
+$this->title = 'Редактировать данные врача: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Список врачей', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Редактирование';
 ?>
 <div class="doctor-update">
 

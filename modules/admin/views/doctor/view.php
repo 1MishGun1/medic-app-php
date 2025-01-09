@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Doctor;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -7,7 +8,7 @@ use yii\widgets\DetailView;
 /** @var app\models\Doctor $model */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Doctors', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Список врачей', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -16,11 +17,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Назад', ['index'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Точно удалить врача из системы?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -34,7 +36,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'experience',
             'education',
             'specialization',
-            'img',
+            [
+                'attribute' => 'img',
+                'value' => Html::img('/img/' . ($model->img ?? Doctor::NO_IMG), ['class' => 'w-50']),
+                'format' => 'html'
+            ]
         ],
     ]) ?>
 

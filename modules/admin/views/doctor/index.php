@@ -27,9 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= ListView::widget([
         'dataProvider' => $dataProvider,
         'itemOptions' => ['class' => 'item'],
-        'itemView' => function ($model, $key, $index, $widget) {
-            return Html::a(Html::encode($model->name), ['view', 'id' => $model->id]);
-        },
+        'layout' => "<div class=\"d-flex justify-content-center flex-wrap gap-3\">{items}</div>",
+        'itemView' => 'item',
     ]) ?>
 
     <?php Pjax::end(); ?>

@@ -7,6 +7,7 @@ use app\modules\admin\models\DoctorSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * DoctorController implements the CRUD actions for Doctor model.
@@ -70,8 +71,13 @@ class DoctorController extends Controller
         $model = new Doctor();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post())) {
+                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+                if (is_null($model->imageFile) || $model->upload()) {
+                    if ($model->save(false)) {
+                        return $this->redirect(['view', 'id' => $model->id]);
+                    }
+                }
             }
         } else {
             $model->loadDefaultValues();
