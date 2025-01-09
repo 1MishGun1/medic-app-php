@@ -19,9 +19,10 @@ use yii\db\Query;
  */
 class Doctor extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
+
+    public $imageFile;
+    const NO_IMG = 'no-img.png';
+
     public static function tableName()
     {
         return 'doctor';
@@ -33,9 +34,10 @@ class Doctor extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'education', 'specialization', 'img'], 'required'],
+            [['name', 'education', 'specialization'], 'required'],
             [['experience'], 'integer'],
             [['name', 'education', 'specialization', 'img'], 'string', 'max' => 255],
+            [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg, webp'],
         ];
     }
 
@@ -45,13 +47,32 @@ class Doctor extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
-            'experience' => 'Experience',
-            'education' => 'Education',
-            'specialization' => 'Specialization',
-            'img' => 'Img',
+            'id' => 'Номер врача',
+            'name' => 'ФИО врача',
+            'experience' => 'Опыт работы',
+            'education' => 'Образование',
+            'specialization' => 'Специализация',
+            'img' => 'Фото',
+            'imageFile' => 'Фото'
         ];
+    }
+
+    public function upload()
+    {
+        if ($this->validate()) {
+            $fileName = Yii::$app->user->id
+                        . '_'
+                        . time()
+                        . '_'
+                        . Yii::$app->security->generateRandomString()
+                        . '.'
+                        . $this->imageFile->extension;
+            $this->imageFile->saveAs('img/' . $fileName);
+            $this->img = $fileName;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
