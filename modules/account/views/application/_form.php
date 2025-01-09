@@ -23,7 +23,9 @@ use yii\widgets\Pjax;
         'id' => 'form-application'
     ]); ?>
 
-    <?= $form->field($model, 'doctor_id')->dropDownList($nameDoctor, ['prompt' => 'Выберите доктора']) ?>
+    <div class="mb-2 fw-bold">
+        Выбранный врач: <?= $model->doctor->name ?>
+    </div>
 
     <?= $form->field($model, 'complaints_id')->dropDownList($titleComplaint, ['prompt' => 'Выберите жалобу', 'disabled' => (bool)$model->check]) ?>
 

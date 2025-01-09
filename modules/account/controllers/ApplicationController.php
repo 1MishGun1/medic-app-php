@@ -69,11 +69,12 @@ class ApplicationController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate($doctor_id)
     {
         $model = new Application();
         $model->user_id = Yii::$app->user->id;
         $model->status_id = Status::getStatusId('Новый');
+        $model->doctor_id = $doctor_id;
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
